@@ -7,10 +7,10 @@ RUN apt-get update && \
 
 ENV SCALA_DIR /root/scala
 
-#RUN mkdir -p $SCALA_DIR && \
-#	chmod 777 $SCALA_DIR
+RUN mkdir -p $SCALA_DIR && \
+	chmod 777 $SCALA_DIR
 
 # ENTRYPOINT ["alias ll='ls -l'"]
-#WORKDIR $SCALA_DIR
+WORKDIR $SCALA_DIR
 
 CMD ["sbt","~run"]
