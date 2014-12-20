@@ -22,19 +22,12 @@ A container to hold data :
 1. my-data :
 
 ```bash
-        docker run --name my-data my-data true
+docker run --name my-data my-data true
 ```
 
-2. share image with windows :
+2. container with sbt
 
 ```bash
-        docker run --rm -v /usr/local/bin/docker:/docker -v /var/run/docker.sock:/docker.sock svendowideit/s
-amba my-data
-```
-
-3. container with sbt
-
-```bash
-         docker run --rm -ti --volumes-from my-data elongeau/scala bash
+docker run --rm -ti -volumes-from my-data -v ~/projects/:/root/scala elongeau/scala bash
 ```
 
