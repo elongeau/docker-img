@@ -28,6 +28,6 @@ docker run --name my-data my-data true
 2. container with sbt
 
 ```bash
-docker run --rm -ti -volumes-from my-data -v ~/projects/:/root/scala elongeau/scala bash
+docker run --rm -ti -volumes-from my-data -v ~/projects/:/root/scala -v ~/vimHost/:/root/vims elongeau/scala bash
 ```
 
