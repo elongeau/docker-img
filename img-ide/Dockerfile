@@ -16,4 +16,8 @@ RUN passwd -d eclim
 USER eclim
 WORKDIR /home/eclim
 
+RUN wget http://sourceforge.net/projects/eclim/files/eclim/2.4.1/eclim_2.4.1.jar/download && \
+        mv download eclim_2.4.1.jar
+RUN wget http://eclipse.ialto.com/technology/epp/downloads/release/luna/SR1a/eclipse-java-luna-SR1a-linux-gtk-x86_64.tar.gz
+
 CMD bash
