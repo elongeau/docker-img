@@ -20,4 +20,13 @@ RUN wget http://sourceforge.net/projects/eclim/files/eclim/2.4.1/eclim_2.4.1.jar
         mv download eclim_2.4.1.jar
 RUN wget http://eclipse.ialto.com/technology/epp/downloads/release/luna/SR1a/eclipse-java-luna-SR1a-linux-gtk-x86_64.tar.gz
 
+RUN mkdir -p ~/.vim && \
+        touch ~/.vimrc && \
+        tar -zxf eclipse-java-luna-SR1a-linux-gtk-x86_64.tar.gz
+
+RUN java -Dvim.files=$HOME/.vim \
+         -Declipse.home=$HOME/eclipse \
+         -jar eclim_2.4.1.jar install
+
+
 CMD bash
