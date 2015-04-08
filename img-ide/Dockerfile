@@ -45,4 +45,11 @@ RUN java -Dvim.files=$HOME/.vim \
          -Declipse.home=$HOME/eclipse \
          -jar eclim_2.4.1.jar install
 
+USER root
+
+RUN apt-get update && \
+        apt-get install -y --force-yes \
+	tmux
+
+USER eclim
 CMD Xvfb :1 -screen 0 1024x768x24 & DISPLAY=:1 $HOME/eclipse/eclimd -d > /dev/null  2>&1 & tmux -2
