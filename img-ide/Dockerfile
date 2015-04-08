@@ -49,7 +49,8 @@ USER root
 
 RUN apt-get update && \
         apt-get install -y --force-yes \
-	tmux
+	tmux \
+	libswt-gtk-3-java-gcj
 
 USER eclim
-CMD Xvfb :1 -screen 0 1024x768x24 & DISPLAY=:1 $HOME/eclipse/eclimd -d > /dev/null  2>&1 & tmux -2
+CMD /bin/zsh
