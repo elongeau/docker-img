@@ -1,14 +1,22 @@
-FROM williamyeh/scala:latest
+FROM williamyeh/scala:latest 
+
 MAINTAINER elongeau
 
 RUN apt-get update && \
-        apt-get install xvfb build-essential -y --force-yes && \
-	apt-get install apt-utils -y --force-yes && \
-	apt-get install curl -y --force-yes && \
-	apt-get install zsh -y --force-yes && \ 
-	apt-get install git -y --force-yes && \
-        apt-get install vim -y --force-yes && \
-        apt-get install tree -y --force-yes 
+        apt-get install -y --force-yes \
+	vim \
+	curl \
+	cmake \
+	zsh \
+	git \
+	xclip \
+	desktop-file-utils \
+	expect \
+	luajit \
+	lua-bitop \
+	lua-lpeg \
+	bzr
+
 
 RUN useradd -ms /bin/zsh eclim
 ENV HOME /home/eclim
@@ -16,17 +24,25 @@ RUN passwd -d eclim
 USER eclim
 WORKDIR /home/eclim
 
-RUN wget http://sourceforge.net/projects/eclim/files/eclim/2.4.1/eclim_2.4.1.jar/download && \
-        mv download eclim_2.4.1.jar
-RUN wget http://eclipse.ialto.com/technology/epp/downloads/release/luna/SR1a/eclipse-java-luna-SR1a-linux-gtk-x86_64.tar.gz
-
 RUN mkdir -p ~/.vim && \
-        touch ~/.vimrc && \
-        tar -zxf eclipse-java-luna-SR1a-linux-gtk-x86_64.tar.gz
+        touch ~/.vimrc
+
+RUN wget http://downloads.typesafe.com/scalaide-pack/4.0.0.vfinal-luna-211-20150305/scala-SDK-4.0.0-vfinal-2.11-linux.gtk.x86_64.tar.gz
+RUN wget http://ftp.fau.de/eclipse/technology/epp/downloads/release/luna/SR2/eclipse-java-luna-SR2-linux-gtk-x86_64.tar.gz
+
+RUN tar -zvxf eclipse-java-luna-SR2-linux-gtk-x86_64.tar.gz && \
+	ls -al && \
+	rm eclipse-java-luna-SR2-linux-gtk-x86_64.tar.gz
+
+RUN DISPLAY=:1 $HOME/eclipse/eclipse -nosplash -consolelog -debug -application org.eclipse.equinox.p2.director -repository http://download.eclipse.org/releases/luna -installIU org.eclipse.dltk.core.feature.group
+RUN DISPLAY=:1 $HOME/eclipse/eclipse -nosplash -consolelog -debug -application org.eclipse.equinox.p2.director -repository http://download.eclipse.org/releases/luna -installIU org.eclipse.dltk.ruby.feature.group
+RUN DISPLAY=:1 $HOME/eclipse/eclipse -nosplash -consolelog -debug -application org.eclipse.equinox.p2.director -repository http://download.eclipse.org/releases/luna -installIU org.eclipse.jdt.feature.group
+RUN DISPLAY=:1 $HOME/eclipse/eclipse -nosplash -consolelog -debug -application org.eclipse.equinox.p2.director -repository http://download.scala-ide.org/sdk/lithium/e44/scala211/stable/site -installIU org.scala-ide.sdt.feature.feature.group
+
+RUN wget http://heanet.dl.sourceforge.net/project/eclim/eclim/2.4.1/eclim_2.4.1.jar
 
 RUN java -Dvim.files=$HOME/.vim \
          -Declipse.home=$HOME/eclipse \
          -jar eclim_2.4.1.jar install
 
-
-CMD bash
+CMD Xvfb :1 -screen 0 1024x768x24 & DISPLAY=:1 $HOME/eclipse/eclimd -d > /dev/null  2>&1 & tmux -2
