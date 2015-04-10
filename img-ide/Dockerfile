@@ -48,7 +48,6 @@ RUN java -Dvim.files=$HOME/.vim \
          -Declipse.home=$HOME/eclipse \
          -jar eclim_2.4.1.jar install
 
-USER eclim
 ENV ZSH $HOME/.oh-my-zsh
 RUN git clone --depth=1 https://github.com/robbyrussell/oh-my-zsh.git $ZSH
 RUN cp $ZSH/templates/zshrc.zsh-template ~/.zshrc
