@@ -1,5 +1,4 @@
 FROM williamyeh/scala:latest 
-
 MAINTAINER elongeau
 
 RUN apt-get update && \
@@ -51,5 +50,15 @@ RUN java -Dvim.files=$HOME/.vim \
 ENV ZSH $HOME/.oh-my-zsh
 RUN git clone --depth=1 https://github.com/robbyrussell/oh-my-zsh.git $ZSH
 RUN cp $ZSH/templates/zshrc.zsh-template ~/.zshrc
+
+RUN curl https://raw.githubusercontent.com/n8han/conscript/master/setup.sh | sh
+RUN PATH=$PATH:$HOME/bin/cs
+COPY sbt_test.sh $HOME/sbt_test.sh
+USER root
+RUN chmod 777 $HOME/sbt_test.sh
+USER eclim
+RUN $HOME/sbt_test.sh
+RUN $HOME/bin/cs n8han/giter8 && \
+	g8
 
 CMD Xvfb :1 -screen 0 1024x768x24 & DISPLAY=:1 $HOME/eclipse/eclimd -d > /dev/null  2>&1 & tmux -2
