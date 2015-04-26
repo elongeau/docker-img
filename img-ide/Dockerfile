@@ -61,4 +61,15 @@ RUN $HOME/bin/cs n8han/giter8
 RUN $HOME/bin/g8 n8han/giter8 --name=test && \
 	rm -rf $HOME/test
 
-CMD Xvfb :1 -screen 0 1024x768x24 & DISPLAY=:1 $HOME/eclipse/eclimd -d > /dev/null  2>&1 & tmux -2
+# Install YouCompleteMe
+USER root
+RUN apt-get update && apt-get install build-essential cmake python-dev -y --force-yes
+
+USER eclim
+RUN curl https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh | sh
+RUN curl https://raw.githubusercontent.com/elongeau/dotfiles/master/.vimrc > .vimrc
+RUN echo hello
+RUN $HOME/.vim/bundle/neobundle.vim/bin/neoinstall
+RUN $HOME/.vim/bundle/YouCompleteMe/install.sh
+#CMD Xvfb :1 -screen 0 1024x768x24 & DISPLAY=:1 $HOME/eclipse/eclimd -d > /dev/null  2>&1 & tmux -2
+CMD zsh
