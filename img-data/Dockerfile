@@ -1,3 +1,5 @@
-FROM busybox
+FROM phusion/baseimage 
 
-VOLUME /root
+RUN useradd -ms /bin/bash eclim
+ENV HOME /home/eclim
+RUN passwd -d eclim
