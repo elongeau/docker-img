@@ -63,8 +63,11 @@ RUN $HOME/bin/g8 n8han/giter8 --name=test && \
 
 USER eclim
 RUN curl https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh | sh
-RUN echo hello
 RUN curl https://raw.githubusercontent.com/elongeau/dotfiles/master/.vimrc > .vimrc
 RUN $HOME/.vim/bundle/neobundle.vim/bin/neoinstall
 RUN mkdir $HOME/.vim-tmp
-CMD Xvfb :1 -screen 0 1024x768x24 & DISPLAY=:1 $HOME/eclipse/eclimd -d > /dev/null  2>&1 & tmux -2
+RUN echo 'alias tmux="TERM=screen-256color-bce tmux"' >> $HOME/.zshrc
+RUN echo 'set -g default-terminal "xterm"' >> $HOME/.tmux.conf
+RUN echo 'alias eclim_="Xvfb :1 -screen 0 1024x768x24 & DISPLAY=:1 $HOME/eclipse/eclimd -d &> /dev/null"' >> $HOME/.zshrc
+
+CMD zsh
