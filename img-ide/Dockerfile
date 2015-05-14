@@ -48,7 +48,6 @@ RUN $HOME/bin/cs n8han/giter8
 RUN $HOME/bin/g8 n8han/giter8 --name=test && \
 	rm -rf $HOME/test
 
-USER eclim
 RUN curl https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh | sh
 RUN curl https://raw.githubusercontent.com/elongeau/dotfiles/master/.vimrc > .vimrc
 RUN $HOME/.vim/bundle/neobundle.vim/bin/neoinstall
