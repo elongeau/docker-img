@@ -62,6 +62,8 @@ RUN curl https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/insta
 # téléchargement de mon .vimrc
 RUN curl https://raw.githubusercontent.com/elongeau/dotfiles/master/.vimrc > .vimrc
 RUN $HOME/.vim/bundle/neobundle.vim/bin/neoinstall
+
+# création d'un répertoire pour les backup des fichiers édités dans vim
 RUN mkdir $HOME/.vim-tmp
 
 CMD zsh
