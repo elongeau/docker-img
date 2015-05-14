@@ -1,33 +1,17 @@
 # Docker Images
 
-## Images
-### img-scala
+Dépôt pour mon image permettant de faire du dev Scala avec vim.
 
-contains an image to run `sbt`. To run the image :
+Il ne contient qu'une seule image, celle-ci est utilisé pour 2 containers :
 
-Once in the container
+* data-only : le répertoire `/home/eclim` est le répertoire de travail
+* "ide" : le conteneur *applicatif*
 
-1. cd to `/root/projects/<the scala project>`
-2. `sbt ~test`
+# mode d'emploi
 
-### img-data
-
-A container to hold data :
-
-* scala sources
-* scala dependencies (in `/root/.sbt` and `/root/.ivy2`)
-
-## Run all
-
-1. my-data :
-
+Dans `img-ide` :
 ```bash
-docker run --name my-data my-data true
+$ docker build -t elongeau/ide . # construit l'image
+$ docker run -d --name data ide echo "data only container"
+$ docker run --rm -it --volumes-from data ide
 ```
-
-2. container with sbt
-
-```bash
-docker run --rm -ti -volumes-from my-data -v ~/projects/:/root/scala -v ~/vimHost/:/root/vims elongeau/scala bash
-```
-
