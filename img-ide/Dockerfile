@@ -1,8 +1,6 @@
 FROM williamyeh/scala:latest 
 MAINTAINER elongeau
 
-VOLUME $HOME
-
 # installation de paquet Debian
 RUN apt-get update && \
         apt-get install -y --force-yes \
@@ -31,6 +29,7 @@ RUN apt-get update && \
 RUN useradd -ms /bin/zsh eclim
 ENV HOME /home/eclim
 RUN passwd -d eclim
+VOLUME $HOME
 
 # utilisation du script `sbt_test.sh` pour installer les dépendances sbt
 COPY sbt_test.sh $HOME/sbt_test.sh
