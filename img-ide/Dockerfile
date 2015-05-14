@@ -1,6 +1,8 @@
 FROM williamyeh/scala:latest 
 MAINTAINER elongeau
 
+VOLUME $HOME
+
 RUN apt-get update && \
         apt-get install -y --force-yes \
 	vim \
@@ -53,5 +55,4 @@ RUN curl https://raw.githubusercontent.com/elongeau/dotfiles/master/.vimrc > .vi
 RUN $HOME/.vim/bundle/neobundle.vim/bin/neoinstall
 RUN mkdir $HOME/.vim-tmp
 
-VOLUME $HOME
 CMD zsh
