@@ -24,7 +24,7 @@ RUN useradd -ms /bin/zsh eclim
 ENV HOME /home/eclim
 RUN passwd -d eclim
 COPY sbt_test.sh $HOME/sbt_test.sh
-RUN chmod 777 $HOME/sbt_test.sh
+RUN chmod 777 $HOME/sbt_test.sh && rm -rf $HOME/sbt_test.sh
 
 USER eclim
 WORKDIR /home/eclim
