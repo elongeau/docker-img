@@ -67,4 +67,8 @@ RUN curl https://raw.githubusercontent.com/elongeau/dotfiles/master/.vimrc > .vi
 RUN $HOME/.vim/bundle/neobundle.vim/bin/neoinstall
 RUN mkdir $HOME/.vim-tmp
 
+USER root
+RUN apt-get update && apt-get install sudo vim-nox vim-gtk vim-gnome vim-athena -y --force-yes
+
+USER eclim
 CMD zsh
