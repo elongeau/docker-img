@@ -17,8 +17,7 @@ WORKDIR /home/eclim
 
 # installation de oh-my-zsh
 ENV ZSH $HOME/.oh-my-zsh
-RUN git clone --depth=1 https://github.com/robbyrussell/oh-my-zsh.git $ZSH
-RUN cp $ZSH/templates/zshrc.zsh-template ~/.zshrc
+RUN git clone --depth=1 https://github.com/robbyrussell/oh-my-zsh.git | sh
 
 # installation de conscript
 RUN curl https://raw.githubusercontent.com/n8han/conscript/master/setup.sh | sh
