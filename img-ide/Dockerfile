@@ -70,5 +70,6 @@ RUN mkdir $HOME/.vim-tmp
 USER root
 RUN apt-get update && apt-get install sudo vim-nox vim-gtk vim-gnome vim-athena -y --force-yes
 
+VOLUME $HOME
 USER eclim
 CMD zsh
