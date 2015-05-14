@@ -34,24 +34,6 @@ RUN chmod 777 $HOME/sbt_test.sh && rm -rf $HOME/sbt_test.sh
 USER eclim
 WORKDIR /home/eclim
 
-RUN wget http://ftp.fau.de/eclipse/technology/epp/downloads/release/luna/SR2/eclipse-java-luna-SR2-linux-gtk-x86_64.tar.gz
-
-RUN tar -zvxf eclipse-java-luna-SR2-linux-gtk-x86_64.tar.gz && \
-	ls -al && \
-	rm eclipse-java-luna-SR2-linux-gtk-x86_64.tar.gz
-
-RUN DISPLAY=:1 $HOME/eclipse/eclipse -nosplash -consolelog -debug -application org.eclipse.equinox.p2.director -repository http://download.eclipse.org/releases/luna -installIU org.eclipse.dltk.core.feature.group
-RUN DISPLAY=:1 $HOME/eclipse/eclipse -nosplash -consolelog -debug -application org.eclipse.equinox.p2.director -repository http://download.eclipse.org/releases/luna -installIU org.eclipse.dltk.ruby.feature.group
-RUN DISPLAY=:1 $HOME/eclipse/eclipse -nosplash -consolelog -debug -application org.eclipse.equinox.p2.director -repository http://download.eclipse.org/releases/luna -installIU org.eclipse.jdt.feature.group
-RUN DISPLAY=:1 $HOME/eclipse/eclipse -nosplash -consolelog -debug -application org.eclipse.equinox.p2.director -repository http://download.scala-ide.org/sdk/lithium/e44/scala211/stable/site -installIU org.scala-ide.sdt.feature.feature.group
-
-RUN wget http://heanet.dl.sourceforge.net/project/eclim/eclim/2.4.1/eclim_2.4.1.jar 
-
-RUN java -Dvim.files=$HOME/.vim \
-         -Declipse.home=$HOME/eclipse \
-         -jar eclim_2.4.1.jar install
-RUN rm -rf eclim_2.4.1.jar
-
 ENV ZSH $HOME/.oh-my-zsh
 RUN git clone --depth=1 https://github.com/robbyrussell/oh-my-zsh.git $ZSH
 RUN cp $ZSH/templates/zshrc.zsh-template ~/.zshrc
