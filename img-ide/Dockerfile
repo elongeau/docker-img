@@ -34,7 +34,7 @@ RUN passwd -d eclim
 
 # utilisation du script `sbt_test.sh` pour installer les dépendances sbt
 COPY sbt_test.sh $HOME/sbt_test.sh
-RUN chmod 777 $HOME/sbt_test.sh && rm -rf $HOME/sbt_test.sh
+RUN chmod 777 $HOME/sbt_test.sh
 
 # avec l'utilisateur eclim
 USER eclim
@@ -50,7 +50,7 @@ RUN curl https://raw.githubusercontent.com/n8han/conscript/master/setup.sh | sh
 RUN PATH=$PATH:$HOME/bin/cs
 
 RUN $HOME/sbt_test.sh && \
-	rm -rf build.sbt target project
+	rm -rf build.sbt target project sbt_test.sh
 
 # installation de giter8
 RUN $HOME/bin/cs n8han/giter8
