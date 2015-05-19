@@ -5,7 +5,6 @@ MAINTAINER elongeau
 RUN useradd -ms /bin/zsh eclim
 ENV HOME /home/eclim
 RUN passwd -d eclim
-VOLUME $HOME
 
 # utilisation du script `sbt_test.sh` pour installer les dépendances sbt
 COPY sbt_test.sh $HOME/sbt_test.sh
@@ -18,4 +17,5 @@ WORKDIR /home/eclim
 # installation de oh-my-zsh
 RUN curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh || echo "Don't care of errors"
 
+VOLUME $HOME
 CMD zsh
