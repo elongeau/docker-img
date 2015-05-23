@@ -29,6 +29,9 @@ RUN $HOME/bin/cs n8han/giter8
 RUN $HOME/bin/g8 fayimora/basic-scala-project --name=test && \
 	rm -rf $HOME/test # le projet est initialisé pour télécharger les dépendances de giter8
 
+# Ajout d'un alias pour g8
+RUN echo "alias g8='$HOME/bin/g8'" >> $HOME/.zshrc
+
 # installtion de neobundle pour vim
 RUN curl https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh | sh
 # téléchargement de mon .vimrc
