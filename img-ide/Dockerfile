@@ -24,5 +24,10 @@ RUN $HOME/sbt_test.sh && \
 RUN curl https://raw.githubusercontent.com/n8han/conscript/master/setup.sh | sh
 RUN PATH=$PATH:$HOME/bin/cs
 
+# installation de giter8
+RUN $HOME/bin/cs n8han/giter8
+RUN $HOME/bin/g8 n8han/giter8 --name=test && \
+	rm -rf $HOME/test # le projet est initialisé pour télécharger les dépendances de giter8
+
 VOLUME $HOME
 CMD zsh
