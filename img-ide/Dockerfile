@@ -26,7 +26,7 @@ RUN PATH=$PATH:$HOME/bin/cs
 
 # installation de giter8
 RUN $HOME/bin/cs n8han/giter8
-RUN $HOME/bin/g8 n8han/giter8 --name=test && \
+RUN $HOME/bin/g8 fayimora/basic-scala-project --name=test && \
 	rm -rf $HOME/test # le projet est initialisé pour télécharger les dépendances de giter8
 
 # installtion de neobundle pour vim
@@ -39,4 +39,5 @@ RUN $HOME/.vim/bundle/neobundle.vim/bin/neoinstall
 RUN mkdir $HOME/.vim-tmp
 
 VOLUME $HOME
+
 CMD zsh
