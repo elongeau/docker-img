@@ -29,5 +29,11 @@ RUN $HOME/bin/cs n8han/giter8
 RUN $HOME/bin/g8 n8han/giter8 --name=test && \
 	rm -rf $HOME/test # le projet est initialisé pour télécharger les dépendances de giter8
 
+# installtion de neobundle pour vim
+RUN curl https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh | sh
+# téléchargement de mon .vimrc
+RUN curl https://raw.githubusercontent.com/elongeau/dotfiles/master/.vimrc > .vimrc
+RUN $HOME/.vim/bundle/neobundle.vim/bin/neoinstall
+
 VOLUME $HOME
 CMD zsh
