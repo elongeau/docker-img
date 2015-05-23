@@ -20,5 +20,9 @@ RUN curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.s
 RUN $HOME/sbt_test.sh && \
 	rm -rf build.sbt target project sbt_test.sh
 
+# installation de conscript
+RUN curl https://raw.githubusercontent.com/n8han/conscript/master/setup.sh | sh
+RUN PATH=$PATH:$HOME/bin/cs
+
 VOLUME $HOME
 CMD zsh
