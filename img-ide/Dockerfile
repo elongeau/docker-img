@@ -35,5 +35,8 @@ RUN curl https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/insta
 RUN curl https://raw.githubusercontent.com/elongeau/dotfiles/master/.vimrc > .vimrc
 RUN $HOME/.vim/bundle/neobundle.vim/bin/neoinstall
 
+# création d'un répertoire pour les backup des fichiers édités dans vim
+RUN mkdir $HOME/.vim-tmp
+
 VOLUME $HOME
 CMD zsh
