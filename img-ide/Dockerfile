@@ -42,4 +42,5 @@ RUN $HOME/.vim/bundle/neobundle.vim/bin/neoinstall
 RUN mkdir $HOME/.vim-tmp
 
 VOLUME $HOME
+ENTRYPOINT curl https://raw.githubusercontent.com/elongeau/dotfiles/master/vimrc > .vimrc
 CMD zsh
