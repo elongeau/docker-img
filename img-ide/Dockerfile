@@ -32,11 +32,11 @@ RUN $HOME/bin/g8 fayimora/basic-scala-project --name=test && \
 # Ajout d'un alias pour g8
 RUN echo "alias g8='$HOME/bin/g8'" >> $HOME/.zshrc
 
-# installtion de neobundle pour vim
-RUN curl https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh | sh
+# installtion de vundle pour vim
+RUN git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 # téléchargement de mon .vimrc
 RUN curl https://raw.githubusercontent.com/elongeau/dotfiles/master/vimrc > .vimrc
-RUN $HOME/.vim/bundle/neobundle.vim/bin/neoinstall
+RUN vim -E -u NONE -S ~/.vimrc +PluginInstall +qall || echo 0
 
 # création d'un répertoire pour les backup des fichiers édités dans vim
 RUN mkdir $HOME/.vim-tmp
