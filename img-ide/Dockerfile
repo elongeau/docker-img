@@ -41,5 +41,14 @@ RUN vim -E -u NONE -S ~/.vimrc +PluginInstall +qall || echo 0
 # création d'un répertoire pour les backup des fichiers édités dans vim
 RUN mkdir $HOME/.vim-tmp
 
+# Installation de neovim
+USER root
+RUN git clone https://github.com/neovim/neovim.git
+RUN apt-get update && \
+    apt-get install libtool libtool-bin autoconf automake cmake g++ pkg-config unzip -y --force-yes
+WORKDIR $HOME/neovim
+RUN make cmake
+
+USER dev
 VOLUME $HOME
 CMD zsh
