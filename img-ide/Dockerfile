@@ -50,5 +50,6 @@ WORKDIR $HOME/neovim
 RUN make cmake
 
 USER dev
+WORKDIR $HOME
 VOLUME $HOME
 CMD zsh
