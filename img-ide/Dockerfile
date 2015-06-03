@@ -48,6 +48,7 @@ RUN apt-get update && \
     apt-get install libtool libtool-bin autoconf automake cmake g++ pkg-config unzip -y --force-yes
 WORKDIR $HOME/neovim
 RUN make cmake
+RUN rm -rf $HOME/neovim
 
 USER dev
 WORKDIR $HOME
