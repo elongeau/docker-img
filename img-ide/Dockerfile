@@ -1,4 +1,4 @@
-FROM elongeau/base 
+FROM elongeau/neovim
 MAINTAINER elongeau
 
 # ajout du user `dev`
@@ -43,12 +43,6 @@ RUN mkdir $HOME/.vim-tmp
 
 # Installation de neovim
 USER root
-RUN git clone https://github.com/neovim/neovim.git
-RUN apt-get update && \
-    apt-get install libtool libtool-bin autoconf automake cmake g++ pkg-config unzip -y --force-yes
-WORKDIR $HOME/neovim
-RUN make cmake
-RUN rm -rf $HOME/neovim
 
 USER dev
 WORKDIR $HOME
