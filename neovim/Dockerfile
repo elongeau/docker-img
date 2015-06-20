@@ -10,5 +10,6 @@ RUN make install
 WORKDIR /
 RUN rm -rf /neovim
 
+RUN alias -g nvim="nvim -u ~/.vimrc"
 CMD bash
 
